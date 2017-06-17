@@ -1,9 +1,9 @@
 const TeleBot = require('telebot');
 var Credentials = require('./Credentials.js');
 const bot = new TeleBot({
-    token: Credentials.getAuthToken(),
+    token: 'bot' + Credentials.getAuthToken(),
     webhook: {
-        url: 'https://api.telegram.org/bot',
+        url: 'https://api.telegram.org',
         host: 'localhost',
         port: (process.env.PORT || 5000)
     }
