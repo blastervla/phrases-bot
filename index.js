@@ -3,12 +3,9 @@ var Credentials = require('./Credentials.js');
 const bot = new TeleBot({
     token: Credentials.getAuthToken(),
     webhook: {
-        // Self-signed certificate:
-        // key: './key.pem',
-        // cert: './cert.pem',
-        url: 'https://....',
-        host: '0.0.0.0',
-        port: 443
+        url: 'https://api.telegram.org/bot' + Credentials.getAuthToken() + '/sendMessage',
+        host: 'localhost',
+        port: (process.env.PORT || 5000)
     }
 });
 
