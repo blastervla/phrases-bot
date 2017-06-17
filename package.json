@@ -1,0 +1,29 @@
+{
+  "name": "phrases-bot",
+  "version": "1.0.0",
+  "description": "A bot that provides media phrases from movies for Telegram",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blastervla/phrases-bot.git"
+  },
+  "keywords": [
+    "Telegram",
+    "Bot",
+    "Phrases",
+    "Media",
+    "Movies"
+  ],
+  "author": "Blastervla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blastervla/phrases-bot/issues"
+  },
+  "homepage": "https://github.com/blastervla/phrases-bot#readme",
+  "dependencies": {
+    "telebot": "^1.2.2"
+  }
+}
