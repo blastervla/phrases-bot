@@ -2,11 +2,13 @@ require('telebot');
 function getQueryAnswers(answers, msg) {
 	let query = msg.query;
     // Create a new answer list object
+    var foundSomething = false;
 	var lineReader = require('readline').createInterface({
 	  input: require('fs').createReadStream('./audioDatabase.vladb')
 	});
-	var foundSomething = false;
 	lineReader.on('line', function (line) {
+		console.log('Line: ' + line);
+		console.log('Index of query (' + query + '): ' + line.indexOf(query));
 		if (line.indexOf(query) != -1) {
 			answers.addVoice({
 				id: _getAudioID(line),
