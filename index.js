@@ -16,7 +16,7 @@ bot.on('inlineQuery', msg => {
     answers.addArticle({
         id: 'query',
         title: 'Searching phrases for:',
-        description: '"' + query + '"'
+        description: '"' + msg.query + '"'
     });
     return bot.answerQuery(MediaManager.getQueryAnswers(answers, msg));
 });
