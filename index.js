@@ -9,6 +9,6 @@ const bot = new TeleBot({
     }
 });
 
-bot.on('text', msg => bot.sendMessage(msg.from.id, msg.text));
+bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 
 bot.start();
