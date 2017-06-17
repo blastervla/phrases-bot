@@ -12,7 +12,6 @@ const bot = new TeleBot({
 });
 bot.on('inlineQuery', msg => {
     let query = msg.query;
-
     // Create a new answer list object
     const answers = bot.answerList(msg.id, {cacheTime: 60});
 
@@ -45,6 +44,6 @@ bot.on('inlineQuery', msg => {
 bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
 // Finally, start our server
-app.listen(3000, function() {
+app.listen((process.env.PORT || 5000), function() {
   console.log('Telegram app listening on port 3000!');
 });
