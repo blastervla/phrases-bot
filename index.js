@@ -3,8 +3,8 @@ var Credentials = require('./Credentials.js');
 const bot = new TeleBot({
     token: 'bot' + Credentials.getAuthToken(),
     webhook: {
-        url: 'https://phrases-bot.herokuapp.com/',
-        host: 'https://api.telegram.org/bot' + Credentials.getAuthToken(),
+        url: 'https://api.telegram.org/bot',
+        host: 'https://api.telegram.org/bot' + Credentials.getAuthToken() + 'setWebhook',
         port: (process.env.PORT || 5000)
     }
 });
