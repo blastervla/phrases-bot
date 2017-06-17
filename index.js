@@ -2,6 +2,7 @@ const TeleBot = require('telebot');
 var express = require('express');
 var app = express();
 var Credentials = require('./Credentials.js');
+var MediaManager = require('./MediaManager.js');
 const bot = new TeleBot({
     token: Credentials.getAuthToken(), // Required. Telegram Bot API token.
     polling: { // Optional. Use polling.
@@ -11,39 +12,17 @@ const bot = new TeleBot({
     }
 });
 bot.on('inlineQuery', msg => {
-    let query = msg.query;
-    // Create a new answer list object
-    const answers = bot.answerList(msg.id, {cacheTime: 60});
-
-    // Article
+	const answers = bot.answerList(msg.id, {cacheTime: 60});
     answers.addArticle({
         id: 'query',
-        title: 'Inline Title',
-        description: `Your query: ${ query }`,
-        message_text: 'Click!'
+        title: 'Searching phrases for:',
+        description: '"' + query + '"'
     });
-
-    // Photo
-    answers.addPhoto({
-        id: 'photo',
-        caption: 'Telegram logo.',
-        photo_url: 'https://telegram.org/img/t_logo.png',
-        thumb_url: 'https://telegram.org/img/t_logo.png'
-    });
-
-    // Gif
-    answers.addGif({
-        id: 'gif',
-        gif_url: 'https://telegram.org/img/tl_card_wecandoit.gif',
-        thumb_url: 'https://telegram.org/img/tl_card_wecandoit.gif'
-    });
-
-    // Send answers
-    return bot.answerQuery(answers);
+    return bot.answerQuery(MediaManager.getQueryAnswers(answers, msg));
 });
 bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
 // Finally, start our server
 app.listen((process.env.PORT || 5000), function() {
-  console.log('Telegram app listening on port 3000!');
+  console.log('Telegram app listening on port ' + (process.env.PORT || 5000) + '!');
 });
