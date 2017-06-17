@@ -37,4 +37,5 @@ bot.on('inlineQuery', msg => {
     return bot.answerQuery(answers);
 
 });
+bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
