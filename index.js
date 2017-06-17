@@ -37,5 +37,4 @@ bot.on('inlineQuery', msg => {
     return bot.answerQuery(answers);
 
 });
-
 bot.start();
