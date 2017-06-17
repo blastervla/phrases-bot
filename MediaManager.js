@@ -30,14 +30,17 @@ function getQueryAnswers(answers, msg) {
 }
 
 function _getAudioTitle(line) {
+	console.log('Audio title: ' + line.substring(line.indexOf('~'), line.indexOf(';')));
 	return line.substring(line.indexOf('~'), line.indexOf(';'));
 }
 
 function _getAudioURL(line) {
+	console.log('Audio url: ' + line.substring(line.indexOf(':')));
 	return line.substring(line.indexOf(':'));
 }
 
 function _getAudioID(line) {
+	console.log('Audio id: ' + line.substring(line.indexOf('~'));
 	return line.substring(line.indexOf('~'));
 }
 
