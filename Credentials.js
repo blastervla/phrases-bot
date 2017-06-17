@@ -3,5 +3,5 @@ function getAuthToken() {
 	return authToken;
 }
 module.exports = {
-	getAuthToken: getAuthToken()
+	getAuthToken: getAuthToken
 };
