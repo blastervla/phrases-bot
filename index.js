@@ -3,7 +3,6 @@ var Credentials = require('./Credentials.js');
 const bot = new TeleBot(Credentials.getAuthToken());
 // On inline query
 bot.on('inlineQuery', msg => {
-
     let query = msg.query;
     console.log(`inline query: ${ query }`);
 
@@ -34,8 +33,7 @@ bot.on('inlineQuery', msg => {
     });
 
     // Send answers
-    return bot.answerQuery(answers);
-
+    return msg.query;
 });
 bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
