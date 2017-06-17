@@ -4,7 +4,7 @@ const bot = new TeleBot({
     token: Credentials.getAuthToken(),
     webhook: {
         url: 'https://api.telegram.org/bot',
-        host: 'https://phrases-bot.herokuapp.com/',
+        host: 'localhost',
         port: (process.env.PORT || 5000)
     }
 });
