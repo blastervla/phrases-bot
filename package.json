@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/blastervla/phrases-bot#readme",
   "dependencies": {
+    "express": "^4.15.3",
     "telebot": "^1.2.2"
   }
 }
