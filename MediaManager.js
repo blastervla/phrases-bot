@@ -20,7 +20,8 @@ function getQueryAnswers(answers, msg) {
 		answers.addArticle({
 	        id: 'nothing_found',
 	        title: 'No results for:',
-	        description: '"' + query + '"'
+	        description: '"' + query + '"',
+	        message_text: 'No results :('
 	    });
 	}
 	return answers;
