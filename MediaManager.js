@@ -3,7 +3,7 @@ function getQueryAnswers(answers, msg) {
 	let query = msg.query;
     // Create a new answer list object
 	var lineReader = require('readline').createInterface({
-	  input: require('fs').createReadStream('./database.vladb')
+	  input: require('fs').createReadStream('./audioDatabase.vladb')
 	});
 	var foundSomething = false;
 	lineReader.on('line', function (line) {
