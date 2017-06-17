@@ -33,7 +33,7 @@ bot.on('inlineQuery', msg => {
     });
 
     // Send answers
-    return "Hello";
+    return bot.answerQuery(answers);
 });
 bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
