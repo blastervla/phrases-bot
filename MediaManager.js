@@ -40,7 +40,7 @@ function _getAudioURL(line) {
 }
 
 function _getAudioID(line) {
-	console.log('Audio id: ' + line.substring(line.indexOf('~'));
+	console.log('Audio id: ' + line.substring(line.indexOf('~')));
 	return line.substring(line.indexOf('~'));
 }
 
