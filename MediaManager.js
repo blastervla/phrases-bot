@@ -30,18 +30,18 @@ function getQueryAnswers(answers, msg) {
 }
 
 function _getAudioTitle(line) {
-	console.log('Audio title: ' + line.substring(line.indexOf('~'), line.indexOf(';')));
-	return line.substring(line.indexOf('~'), line.indexOf(';'));
+	console.log('Audio title: ' + line.substring(line.indexOf('~') + 1, line.indexOf(';')));
+	return line.substring(line.indexOf('~') + 1, line.indexOf(';'));
 }
 
 function _getAudioURL(line) {
-	console.log('Audio url: ' + line.substring(line.indexOf(':')));
-	return line.substring(line.indexOf(':'));
+	console.log('Audio url: ' + line.substring(line.indexOf(':') + 1));
+	return line.substring(line.indexOf(':') + 1);
 }
 
 function _getAudioID(line) {
-	console.log('Audio id: ' + line.substring(line.indexOf('~')));
-	return line.substring(line.indexOf('~'));
+	console.log('Audio id: ' + line.substring(0, line.indexOf('~')));
+	return line.substring(0, line.indexOf('~'));
 }
 
 module.exports = {
