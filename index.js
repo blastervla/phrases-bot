@@ -16,7 +16,7 @@ bot.on('inlineQuery', msg => {
 	const answers = bot.answerList(msg.id, {cacheTime: 60});    
     return bot.answerQuery(MediaManager.getQueryAnswers(answers, msg));
 });
-bot.on(['/tiempos'], (msg) => msg.reply.('Welcome!'));
+bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
 // Finally, start our server
 app.listen((process.env.PORT || 5000), function() {
