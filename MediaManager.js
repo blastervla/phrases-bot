@@ -20,8 +20,8 @@ function getQueryAnswers(answers, msg) {
 			foundSomething = true;
 		} else if (line.indexOf('--- END OF FILE ---') != -1) { //Reached EOF
 			console.log('Reached EOF!');
-			console.log(_getAnswersToReturn(answers, foundSomething));
-			return _getAnswersToReturn(answers, foundSomething);
+			console.log(_getAnswersToReturn(answers, foundSomething, query));
+			return _getAnswersToReturn(answers, foundSomething, query);
 		}
 	});
 }
@@ -41,12 +41,12 @@ function _getAudioID(line) {
 	return line.substring(0, line.indexOf('~'));
 }
 
-function _getAnswersToReturn(answers, hasFoundSomething){
+function _getAnswersToReturn(answers, hasFoundSomething, query){
 	//if (!hasFoundSomething) {
 		answers.addArticle({
 	        id: 'no_results',
 	        title: 'No results for:',
-	        description: '"' + msg.query + '"',
+	        description: '"' + query + '"',
 	        message_text: 'No results'
 	    });
 	//}
