@@ -16,7 +16,7 @@ bot.on('inlineQuery', msg => {
 	const answers = bot.answerList(msg.id, {cacheTime: 60});
 	const answersToReturn = MediaManager.getQueryAnswers(answers, msg);
 	console.log('Answers to send: ' + answersToReturn);
-    return bot.answerQuery(answersToReturn);
+    return MediaManager.getQueryAnswers(answers, msg);
 });
 bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();

@@ -58,7 +58,7 @@ function _getAnswersToReturn(answers, hasFoundSomething, query){
 	        message_text: 'No results'
 	    });
 	//}
-	return answers;
+	return bot.answerQuery(answers);
 }
 
 module.exports = {
