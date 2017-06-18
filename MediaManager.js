@@ -1,6 +1,8 @@
 require('telebot');
 function getQueryAnswers(answers, msg) {
 	let query = msg.query;
+	if (query == "") 
+		return;
     // Create a new answer list object
     var foundSomething = false;
 	var Readline = require('line-by-line');
