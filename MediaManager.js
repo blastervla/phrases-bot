@@ -1,5 +1,5 @@
 require('telebot');
-function getQueryAnswers(answers, msg) {
+function getQueryAnswers(bot, answers, msg) {
 	let query = msg.query;
 	if (query == "") 
 		return;
@@ -31,7 +31,7 @@ function getQueryAnswers(answers, msg) {
 			console.log(_getAnswersToReturn(answers, foundSomething, query));
 		}
 	});
-	return _getAnswersToReturn(answers, foundSomething, query);
+	return _getAnswersToReturn(bot, answers, foundSomething, query);
 }
 
 function _getAudioTitle(line) {
@@ -49,7 +49,7 @@ function _getAudioID(line) {
 	return line.substring(0, line.indexOf('~'));
 }
 
-function _getAnswersToReturn(answers, hasFoundSomething, query){
+function _getAnswersToReturn(bot, answers, hasFoundSomething, query){
 	//if (!hasFoundSomething) {
 		answers.addArticle({
 	        id: 'no_results',
