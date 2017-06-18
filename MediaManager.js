@@ -3,37 +3,31 @@ function getQueryAnswers(answers, msg) {
 	let query = msg.query;
     // Create a new answer list object
     var foundSomething = false;
-	var lineReader = require('readline').createInterface({
-	  input: require('fs').createReadStream('./audioDatabase.vladb')
-	});
-	var ended = false;
-	lineReader.on('end', () => { ended = true });
-	lineReader.on('line', function (line) {
-		if (!ended) {
-			console.log('Line: ' + line);
-			console.log('Index of query (' + query + '): ' + line.indexOf(query));
-			if (line.indexOf(query) != -1) {
-				answers.addVoice({
-					id: _getAudioID(line),
-					title: _getAudioTitle(line),
-					voice_url: _getAudioURL(line)
-				});
-				foundSomething = true;
-			}
-		} else {
-			console.log('ended');
-			return answers;
+	var readline = require('linebyline');
+    var lineReader = readline('./somefile.txt');
+	lineReader.on('line', function(line, lineCount, byteCount) {
+		console.log('Line: ' + line);
+		console.log('Index of query (' + query + '): ' + line.indexOf(query));
+		if (line.indexOf(query) != -1) {
+			answers.addVoice({
+				id: _getAudioID(line),
+				title: _getAudioTitle(line),
+				voice_url: _getAudioURL(line)
+			});
+			foundSomething = true;
 		}
 	});
-	/*if (!foundSomething) {
-		answers.addArticle({
-	        id: 'nothing_found',
-	        title: 'No results for:',
-	        description: '"' + query + '"',
-	        message_text: 'No results :('
-	    });
-	}*/
-	//return answers;
+	lineReader.on('close', function() {
+		if (!foundSomething) {
+			answers.addArticle({
+		        id: 'no_results',
+		        title: 'No results for:',
+		        description: '"' + msg.query + '"',
+		        message_text: 'No results'
+		    });
+		}
+		return answers;
+	});
 }
 
 function _getAudioTitle(line) {

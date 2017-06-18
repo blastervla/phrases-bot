@@ -12,13 +12,7 @@ const bot = new TeleBot({
     }
 });
 bot.on('inlineQuery', msg => {
-	const answers = bot.answerList(msg.id, {cacheTime: 60});
-    answers.addArticle({
-        id: 'query',
-        title: 'Searching phrases for:',
-        description: '"' + msg.query + '"',
-        message_text: 'Search'
-    });
+	const answers = bot.answerList(msg.id, {cacheTime: 60});    
     return bot.answerQuery(MediaManager.getQueryAnswers(answers, msg));
 });
 bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
