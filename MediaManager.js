@@ -5,7 +5,7 @@ function getQueryAnswers(answers, msg) {
 		return;
 	if (query == "tiempos") {
 		answers.addVoice({
-			id: _getAudioID('nunca_compres'),
+			id: _getAudioID('tiempos'),
 			title: _getAudioTitle('Nunca compres tiempos compartidos'),
 			voice_url: _getAudioURL('https://dl.dropboxusercontent.com/s/mnfx6c4p6s8gs38/Nunca_compres_tiempos_compartidos.ogg')
 		});
