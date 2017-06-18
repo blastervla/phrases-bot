@@ -18,15 +18,18 @@ function getQueryAnswers(answers, msg) {
 			foundSomething = true;
 		}
 	});
-	if (!foundSomething) {
+	lineReader.on('end' function() {
+		return answers;
+	});
+	/*if (!foundSomething) {
 		answers.addArticle({
 	        id: 'nothing_found',
 	        title: 'No results for:',
 	        description: '"' + query + '"',
 	        message_text: 'No results :('
 	    });
-	}
-	return answers;
+	}*/
+	//return answers;
 }
 
 function _getAudioTitle(line) {
