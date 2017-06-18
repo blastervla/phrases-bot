@@ -10,6 +10,7 @@ function getQueryAnswers(answers, msg) {
 	lineReader.on('line', function(line) {
 		console.log('Line: ' + line);
 		console.log('Index of query (' + query + '): ' + line.indexOf(query));
+		console.log('Index of --- END OF FILE --- : ' + line.indexOf('--- END OF FILE ---'));
 		if (line.indexOf(query) != -1) {
 			answers.addVoice({
 				id: _getAudioID(line),
@@ -17,7 +18,7 @@ function getQueryAnswers(answers, msg) {
 				voice_url: _getAudioURL(line)
 			});
 			foundSomething = true;
-		} else if (line.indexOf('\n') != -1) { //Reached EOF
+		} else if (line.indexOf('--- END OF FILE ---') != -1) { //Reached EOF
 			console.log('Reached EOF!');
 			return _getAnswersToReturn(answers, foundSomething);
 		}
