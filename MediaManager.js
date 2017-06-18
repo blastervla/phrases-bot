@@ -4,7 +4,7 @@ function getQueryAnswers(answers, msg) {
     // Create a new answer list object
     var foundSomething = false;
 	var readline = require('linebyline');
-    var lineReader = readline('./somefile.txt');
+    var lineReader = readline('./audioDatabase.vladb');
 	lineReader.on('line', function(line, lineCount, byteCount) {
 		console.log('Line: ' + line);
 		console.log('Index of query (' + query + '): ' + line.indexOf(query));
