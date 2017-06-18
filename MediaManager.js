@@ -39,7 +39,7 @@ function _getAudioID(line) {
 }
 
 function _getAnswersToReturn(answers, hasFoundSomething){
-	if (!foundSomething) {
+	if (!hasFoundSomething) {
 		answers.addArticle({
 	        id: 'no_results',
 	        title: 'No results for:',
