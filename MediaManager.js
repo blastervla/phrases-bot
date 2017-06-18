@@ -20,6 +20,7 @@ function getQueryAnswers(answers, msg) {
 			foundSomething = true;
 		} else if (line.indexOf('--- END OF FILE ---') != -1) { //Reached EOF
 			console.log('Reached EOF!');
+			console.log(_getAnswersToReturn(answers, foundSomething));
 			return _getAnswersToReturn(answers, foundSomething);
 		}
 	});
