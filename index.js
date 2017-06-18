@@ -14,9 +14,9 @@ const bot = new TeleBot({
 });
 bot.on('inlineQuery', msg => {
 	const answers = bot.answerList(msg.id, {cacheTime: 60});
-	const answersToReturn = MediaManager.getQueryAnswers(answers, msg);
+	var answersToReturn = MediaManager.getQueryAnswers(bot, answers, msg);
 	console.log('Answers to send: ' + answersToReturn);
-    return MediaManager.getQueryAnswers(bot, answers, msg);
+    return answersToReturn;
 });
 bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
