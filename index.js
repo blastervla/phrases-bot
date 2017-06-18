@@ -1,6 +1,7 @@
 const TeleBot = require('telebot');
 var express = require('express');
 var app = express();
+var http = require("http");
 var Credentials = require('./Credentials.js');
 var MediaManager = require('./MediaManager.js');
 const bot = new TeleBot({
@@ -21,3 +22,7 @@ bot.start();
 app.listen((process.env.PORT || 5000), function() {
   console.log('Telegram app listening on port ' + (process.env.PORT || 5000) + '!');
 });
+setInterval(function() {
+    http.get("http://phrases-bot.herokuapp.com");
+    console.log("Pinging App!");
+}, 300000); // every 5 minutes (300000)
