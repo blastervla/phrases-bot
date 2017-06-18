@@ -17,7 +17,8 @@ function getQueryAnswers(answers, msg) {
 				voice_url: _getAudioURL(line)
 			});
 			foundSomething = true;
-		} else if (line.indexOf('\n')) { //Reached EOF
+		} else if (line.indexOf('\n') != -1) { //Reached EOF
+			console.log('Reached EOF!');
 			return _getAnswersToReturn(answers, foundSomething);
 		}
 	});
