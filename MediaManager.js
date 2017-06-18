@@ -28,7 +28,7 @@ function getQueryAnswers(bot, answers, msg) {
 			foundSomething = true;
 		} else if (line.indexOf('--- END OF FILE ---') != -1) { //Reached EOF
 			console.log('Reached EOF!');
-			console.log(_getAnswersToReturn(answers, foundSomething, query));
+			console.log(_getAnswersToReturn(bot, answers, foundSomething, query));
 		}
 	});
 	return _getAnswersToReturn(bot, answers, foundSomething, query);
