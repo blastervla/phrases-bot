@@ -17,18 +17,9 @@ function getQueryAnswers(answers, msg) {
 				voice_url: _getAudioURL(line)
 			});
 			foundSomething = true;
+		} else if (line.indexOf('\n')) { //Reached EOF
+			return _getAnswersToReturn(answers, foundSomething);
 		}
-	});
-	lineReader.on('end', function() {
-		if (!foundSomething) {
-			answers.addArticle({
-		        id: 'no_results',
-		        title: 'No results for:',
-		        description: '"' + msg.query + '"',
-		        message_text: 'No results'
-		    });
-		}
-		return answers;
 	});
 }
 
@@ -45,6 +36,18 @@ function _getAudioURL(line) {
 function _getAudioID(line) {
 	console.log('Audio id: ' + line.substring(0, line.indexOf('~')));
 	return line.substring(0, line.indexOf('~'));
+}
+
+function _getAnswersToReturn(answers, hasFoundSomething){
+	if (!foundSomething) {
+		answers.addArticle({
+	        id: 'no_results',
+	        title: 'No results for:',
+	        description: '"' + msg.query + '"',
+	        message_text: 'No results'
+	    });
+	}
+	return answers;
 }
 
 module.exports = {
