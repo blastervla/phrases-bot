@@ -3,9 +3,9 @@ function getQueryAnswers(answers, msg) {
 	let query = msg.query;
     // Create a new answer list object
     var foundSomething = false;
-	var readline = require('linebyline');
-    var lineReader = readline('./audioDatabase.vladb');
-	lineReader.on('line', function(line, lineCount, byteCount) {
+	var Readline = require('line-by-line');
+    var lineReader = new Readline('./audioDatabase.vladb');
+	lineReader.on('line', function(line) {
 		console.log('Line: ' + line);
 		console.log('Index of query (' + query + '): ' + line.indexOf(query));
 		if (line.indexOf(query) != -1) {
@@ -17,7 +17,7 @@ function getQueryAnswers(answers, msg) {
 			foundSomething = true;
 		}
 	});
-	lineReader.on('close', function() {
+	lineReader.on('end', function() {
 		if (!foundSomething) {
 			answers.addArticle({
 		        id: 'no_results',
