@@ -42,14 +42,14 @@ function _getAudioID(line) {
 }
 
 function _getAnswersToReturn(answers, hasFoundSomething){
-	if (!hasFoundSomething) {
+	//if (!hasFoundSomething) {
 		answers.addArticle({
 	        id: 'no_results',
 	        title: 'No results for:',
 	        description: '"' + msg.query + '"',
 	        message_text: 'No results'
 	    });
-	}
+	//}
 	return answers;
 }
 
