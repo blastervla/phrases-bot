@@ -19,6 +19,7 @@ function getQueryAnswers(answers, msg) {
 		}
 	});
 	lineReader.on('end', function() {
+		console.log('ended');
 		return answers;
 	});
 	/*if (!foundSomething) {
