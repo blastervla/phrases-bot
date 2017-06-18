@@ -18,7 +18,7 @@ function getQueryAnswers(answers, msg) {
 			foundSomething = true;
 		}
 	});
-	lineReader.on('end' function() {
+	lineReader.on('end', function() {
 		return answers;
 	});
 	/*if (!foundSomething) {
