@@ -6,21 +6,24 @@ function getQueryAnswers(answers, msg) {
 	var lineReader = require('readline').createInterface({
 	  input: require('fs').createReadStream('./audioDatabase.vladb')
 	});
+	var ended = false;
+	lineReader.on('end', () => { ended = true });
 	lineReader.on('line', function (line) {
-		console.log('Line: ' + line);
-		console.log('Index of query (' + query + '): ' + line.indexOf(query));
-		if (line.indexOf(query) != -1) {
-			answers.addVoice({
-				id: _getAudioID(line),
-				title: _getAudioTitle(line),
-				voice_url: _getAudioURL(line)
-			});
-			foundSomething = true;
+		if (!ended) {
+			console.log('Line: ' + line);
+			console.log('Index of query (' + query + '): ' + line.indexOf(query));
+			if (line.indexOf(query) != -1) {
+				answers.addVoice({
+					id: _getAudioID(line),
+					title: _getAudioTitle(line),
+					voice_url: _getAudioURL(line)
+				});
+				foundSomething = true;
+			}
+		} else {
+			console.log('ended');
+			return answers;
 		}
-	});
-	lineReader.on('end', function() {
-		console.log('ended');
-		return answers;
 	});
 	/*if (!foundSomething) {
 		answers.addArticle({
