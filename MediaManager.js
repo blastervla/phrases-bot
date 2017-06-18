@@ -3,14 +3,14 @@ function getQueryAnswers(answers, msg) {
 	let query = msg.query;
 	if (query == "") 
 		return;
-	if (query == "tiempos") {
-		answers.addVoice({
-			id: 'tiempos',
-			title: 'Nunca compres tiempos compartidos',
-			voice_url: 'https://dl.dropboxusercontent.com/s/mnfx6c4p6s8gs38/Nunca_compres_tiempos_compartidos.ogg'
-		});
-		return answers;
-	}
+	// if (query == "tiempos") {
+	// 	answers.addVoice({
+	// 		id: 'tiempos',
+	// 		title: 'Nunca compres tiempos compartidos',
+	// 		voice_url: 'https://dl.dropboxusercontent.com/s/mnfx6c4p6s8gs38/Nunca_compres_tiempos_compartidos.ogg'
+	// 	});
+	// 	return answers;
+	// }
     // Create a new answer list object
     var foundSomething = false;
     var fs  = require("fs");
@@ -29,9 +29,9 @@ function getQueryAnswers(answers, msg) {
 		} else if (line.indexOf('--- END OF FILE ---') != -1) { //Reached EOF
 			console.log('Reached EOF!');
 			console.log(_getAnswersToReturn(answers, foundSomething, query));
-			return _getAnswersToReturn(answers, foundSomething, query);
 		}
 	});
+	return _getAnswersToReturn(answers, foundSomething, query);
 }
 
 function _getAudioTitle(line) {
