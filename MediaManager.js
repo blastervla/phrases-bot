@@ -21,6 +21,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			});
 		}
 	});
+	console.log(answers);
 	return _getAnswersToReturn(bot, answers, query);
 }
 
