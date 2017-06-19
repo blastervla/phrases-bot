@@ -14,16 +14,13 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	//For each line in file:
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-			var uri = _getAudioURL(line);
-			console.log(uri);
 			answers.addVoice({
 				id: _getAudioID(line),
 				title: _getAudioTitle(line),
-				voice_url: uri
+				voice_url: _getAudioURL(line)
 			});
 		}
 	});
-	console.log(answers);
 	return _getAnswersToReturn(bot, answers, query);
 }
 
@@ -32,13 +29,7 @@ function _getAudioTitle(line) {
 }
 
 function _getAudioURL(line) {
-	console.log('Got here');
-	var toReturn = DropboxManager.getFileLink(DropboxManager.FileType.AUDIO, line.substring(line.indexOf(':') + 1));
-	while(toReturn === undefined) {
-		require('deasync').runLoopOnce();
-	}
-	console.log('Return ' + toReturn);
-	return toReturn;
+	return line.substring(line.indexOf(':') + 1);
 }
 
 function _getAudioID(line) {
