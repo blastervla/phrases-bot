@@ -17,7 +17,6 @@ bot.on('inlineQuery', msg => {
 	var answersToReturn = MediaManager.getQueryAnswers(bot, answers, msg);
     return answersToReturn;
 });
-bot.on(['/start', '/hello'], (msg) => msg.reply.text('Welcome!'));
 bot.start();
 // Finally, start our server
 app.listen((process.env.PORT || 5000), function() {
