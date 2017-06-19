@@ -14,13 +14,14 @@ function getFileLink(fileType, fileName) {
       	if(response.url != undefined) {
       		console.log((response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
       		return (response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-      	} else {
-      		dbx.sharingGetSharedLinks({path: filePath}).then(function(response) {
-      			console.log((response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
-      			return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-    		});
       	}
     });
+    dbx.sharingGetSharedLinks({path: filePath}).then(function(response) {
+    	if(response.url != undefined) {
+			console.log((response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
+			return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+		}
+	});
 }
 module.exports = {
 	getFileLink: getFileLink,
