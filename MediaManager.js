@@ -2,8 +2,10 @@ require('telebot');
 const DropboxManager = require('./DropboxManager.js');
 var updatingLinks;
 function getQueryAnswers(bot, answers, msg) {
-	if(updatingLinks)
+	if(updatingLinks) {
+		console.log('Updating links... yet...');
 		return;
+	}
 	let query = msg.query;
 	if (query.indexOf('meme') == -1) {
 	    _getAudioQueryAnswersToReturn(bot, answers, query);
@@ -83,11 +85,12 @@ function updateLinks() {
 		}*/
 		toWrite += line.replace(oldURL, newURL) + '\n';
 	});
-	console.log('ToWrite -2 = ' + toWrite.substring(toWrite.length - 2));
-	fs.writeFile('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 2), function(err) {
+	console.log('ToWrite -2 = ' + toWrite.substring(toWrite.length - 1));
+	fs.writeFile('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 1), function(err) {
 		console.log(err);
 	});
 	updatingLinks = false;
+	console.log('Stopped updating links');
 }
 
 module.exports = {

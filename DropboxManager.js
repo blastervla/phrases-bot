@@ -19,7 +19,7 @@ function getFileLink(fileType, fileName) {
 		dbx.sharingCreateSharedLinkWithSettings({path: filePath}).then(function(response) {
 	      	if(response.url != undefined) {
 	      		console.log((response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
-	      		return (response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+	      		return (response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com').replace('?dl=0', '');
 	      	}
 	    });
 	});
