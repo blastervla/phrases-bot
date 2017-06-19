@@ -42,7 +42,11 @@ function _getAnswersToReturn(bot, answers, query){
 function _getMemeQueryAnswersToReturn(bot, answers, query) {
 	var fs  = require("fs");
 	var memeNumber = query.substring(query.indexOf('meme'), query.indexOf(' ')).toLowerCase;
+	console.log('MemeNumber = ' + memeNumber);
+	console.log('Index of meme = ' + query.indexOf('meme'));
+	console.log('Index of space = ' + query.indexOf(' '));
 	var restOfQuery = query.substring(query.indexOf(' ') + 1);
+	console.log('Rest of query = ' + restOfQuery);
 	//For each line in file:
 	if (memeNumber == 'meme1') {
 		answers.addPhoto({
