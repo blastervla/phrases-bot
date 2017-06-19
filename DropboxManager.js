@@ -6,7 +6,7 @@ function getFileLink(file) {
       	console.log(response);
     });*/
     dbx.sharingGetSharedLinks({path: '/Phrases-Bot/TelegramAudios/Nunca_compres_tiempos_compartidos.ogg'}).then(function(response) {
-      	console.log(response.links.url);
+      	console.log(JSON.parse(response).links.url);
     });
 }
 module.exports = {
