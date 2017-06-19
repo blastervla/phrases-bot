@@ -1,6 +1,9 @@
 require('telebot');
 const DropboxManager = require('./DropboxManager.js');
+var updatingLinks;
 function getQueryAnswers(bot, answers, msg) {
+	if(updatingLinks)
+		return;
 	let query = msg.query;
 	if (query.indexOf('meme') == -1) {
 	    _getAudioQueryAnswersToReturn(bot, answers, query);
@@ -54,16 +57,6 @@ function _getMemeQueryAnswersToReturn(bot, answers, query) {
 		});
 		return _getAnswersToReturn(bot, answers, query);
 	}
-	/*fs.readFileSync('./memeDatabase.vladb').toString().split('\n').forEach(function (line) {
-		if (memeNumber.toLowerCase() == 'all' || line.toLowerCase().indexOf(memeNumber) != -1) {
-			answers.addPhoto({
-				id: _getAudioID(line),
-				title: _getAudioTitle(line),
-				voice_url: _getAudioURL(line)
-			});
-		}
-	});*/
-	return _getAnswersToReturn(bot, answers, query);
 }
 
 function _retardizeText(text) {
@@ -75,6 +68,29 @@ function _retardizeText(text) {
 	return retardizedText;
 }
 
+function updateLinks() {
+	updatingLinks = true;
+	var fs  = require("fs");
+	var toWrite = "";
+	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
+		var oldURL = _getAudioURL(line);
+		var fileName = oldURL.split('/')[oldURL.split('/').length - 1];
+		console.log('FileName = ' + fileName);
+		var newURL = DropboxManager.getFileLink(DropboxManager.FileType.AUDIO, fileName);
+		while(newURL === undefined) {
+			require('deasync').runLoopOnce();
+			console.log('newURL = ' + newURL);
+		}
+		toWrite += line.replace(oldURL, newURL) + '\n';
+	});
+	console.log('ToWrite -2 = ' + toWrite.substring(toWrite.length - 2));
+	fs.writeFile('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 2), function(err) {
+		console.log(err);
+	});
+	updatingLinks = false;
+}
+
 module.exports = {
-	getQueryAnswers: getQueryAnswers
+	getQueryAnswers: getQueryAnswers,
+	updateLinks: updateLinks
 };

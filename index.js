@@ -17,8 +17,9 @@ bot.on('inlineQuery', msg => {
 	var answersToReturn = MediaManager.getQueryAnswers(bot, answers, msg);
     return answersToReturn;
 });
-bot.on('/meme', function(msg) {
-	msg.reply.text(msg.text);
+bot.on('/update', function(msg) {
+	MediaManager.updateLinks();
+	return msg.reply.text('Updating links');
 });
 bot.start();
 // Finally, start our server
@@ -28,4 +29,5 @@ app.listen((process.env.PORT || 5000), function() {
 setInterval(function() {
     http.get("http://phrases-bot.herokuapp.com");
     console.log("Pinging App!");
+    MediaManager.updateLinks();
 }, 300000); // every 5 minutes (300000)
