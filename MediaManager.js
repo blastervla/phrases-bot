@@ -41,23 +41,23 @@ function _getAnswersToReturn(bot, answers, query){
 
 function _getMemeQueryAnswersToReturn(bot, answers, query) {
 	var fs  = require("fs");
-	var memeNumber = query.substring(query.indexOf('meme'), query.indexOf(' ')).toLowerCase();
+	var memeNumber = query.substring(query.indexOf('meme'), query.indexOf(' '));
 	console.log('MemeNumber = ' + memeNumber);
 	console.log('Index of meme = ' + query.indexOf('meme'));
 	console.log('Index of space = ' + query.indexOf(' '));
 	var restOfQuery = query.substring(query.indexOf(' ') + 1);
 	console.log('Rest of query = ' + restOfQuery);
 	//For each line in file:
-	if (memeNumber == 'meme1') {
+	if (memeNumber.toLowerCase() == 'meme1') {
 		answers.addPhoto({
 			id: 'meme1',
 	        caption: _retardizeText(restOfQuery),
 	        photo_url: 'https://www.dropbox.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg',
 	        thumb_url: 'https://www.dropbox.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg'
 		});
-		_getAnswersToReturn(bot, answers, query);
+		return _getAnswersToReturn(bot, answers, query);
 	}
-	fs.readFileSync('./memeDatabase.vladb').toString().split('\n').forEach(function (line) {
+	/*fs.readFileSync('./memeDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (memeNumber.toLowerCase() == 'all' || line.toLowerCase().indexOf(memeNumber) != -1) {
 			answers.addPhoto({
 				id: _getAudioID(line),
@@ -65,7 +65,7 @@ function _getMemeQueryAnswersToReturn(bot, answers, query) {
 				voice_url: _getAudioURL(line)
 			});
 		}
-	});
+	});*/
 	return _getAnswersToReturn(bot, answers, query);
 }
 
