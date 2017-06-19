@@ -1,8 +1,6 @@
 require('telebot');
 function getQueryAnswers(bot, answers, msg) {
 	let query = msg.query;
-	if (query == "") // If query is empty, return nothing.
-		return;
     var foundSomething = false;
     var fs  = require("fs");
     //For each line in file:
