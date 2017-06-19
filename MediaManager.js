@@ -52,8 +52,8 @@ function _getMemeQueryAnswersToReturn(bot, answers, query) {
 		answers.addPhoto({
 			id: 'meme1',
 	        caption: _retardizeText(restOfQuery),
-	        photo_url: 'https://www.dropbox.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg',
-	        thumb_url: 'https://www.dropbox.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg'
+	        photo_url: 'https://dl.dropboxusercontent.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg',
+	        thumb_url: 'https://dl.dropboxusercontent.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg'
 		});
 		return _getAnswersToReturn(bot, answers, query);
 	}
