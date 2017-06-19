@@ -15,12 +15,16 @@ function getFileLink(fileType, fileName) {
       		console.log((response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
       		return (response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
       	}
-    });
+    }).catch(function(error) {
+		console.error(error);
+	});
     dbx.sharingGetSharedLinks({path: filePath}).then(function(response) {
     	if(response.url != undefined) {
 			console.log((response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
 			return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
 		}
+	}).catch(function(error) {
+		console.error(error);
 	});
 }
 module.exports = {
