@@ -1,14 +1,25 @@
 var Dropbox = require('dropbox');
 var Credentials = require('./Credentials.js');
-function getFileLink(file) {
+const path = '/Phrases-Bot/';
+
+const FileType = {
+    AUDIO : 'audio',
+    MEME : 'meme'
+};
+function getFileLink(fileType, fileName) {
 	var dbx = new Dropbox({ accessToken: Credentials.getDropboxAuthToken() });
-	dbx.sharingCreateSharedLinkWithSettings({path: '/Phrases-Bot/TelegramAudios/prueba2.ogg'}).then(function(response) {
-      	console.log(response.url);
+	var filePath = path + (fileType == FileType.AUDIO ? 'TelegramAudios/' : 'TelegramMemes/') + fileName;
+	dbx.sharingCreateSharedLinkWithSettings({path: filePath}).then(function(response) {
+      	if(response.url != undefined) {
+      		return (response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+      	} else {
+      		dbx.sharingGetSharedLinks({path: filePath}).then(function(response) {
+      			return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+    		});
+      	}
     });
-    /*dbx.sharingGetSharedLinks({path: '/Phrases-Bot/TelegramAudios/Nunca_compres_tiempos_compartidos.ogg'}).then(function(response) {
-      	return response.links[0].url;
-    });*/
 }
 module.exports = {
-	getFileLink: getFileLink
+	getFileLink: getFileLink,
+	FileType: FileType
 };
