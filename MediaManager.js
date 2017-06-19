@@ -1,4 +1,5 @@
 require('telebot');
+const DropboxManager = require('./DropboxManager.js');
 function getQueryAnswers(bot, answers, msg) {
 	let query = msg.query;
 	if (query.indexOf('meme') == -1) {
