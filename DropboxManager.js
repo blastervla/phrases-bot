@@ -11,10 +11,8 @@ function getFileLink(fileType, fileName) {
 	var filePath = path + (fileType == FileType.AUDIO ? 'TelegramAudios/' : 'TelegramMemes/') + fileName;
 	console.log(filePath);
 	dbx.sharingGetSharedLinks({path: filePath}).then(function(response) {
-    	if(response.url != undefined) {
-			console.log((response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
-			return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-		}
+		console.log((response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
+		return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
 	}).catch(function(error) {
 		console.error(error);
 		console.error('Well, fuck. Shit happens');
