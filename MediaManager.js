@@ -77,10 +77,10 @@ function updateLinks() {
 		var fileName = oldURL.split('/')[oldURL.split('/').length - 1];
 		console.log('FileName = ' + fileName);
 		var newURL = DropboxManager.getFileLink(DropboxManager.FileType.AUDIO, fileName);
-		while(newURL === undefined) {
+		/*while(newURL === undefined) {
 			require('deasync').runLoopOnce();
 			console.log('newURL = ' + newURL);
-		}
+		}*/
 		toWrite += line.replace(oldURL, newURL) + '\n';
 	});
 	console.log('ToWrite -2 = ' + toWrite.substring(toWrite.length - 2));
