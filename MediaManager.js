@@ -76,7 +76,7 @@ function updateLinks() {
 	var toWrite = "";
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		var oldURL = _getAudioURL(line);
-		var fileName = oldURL.split('/')[oldURL.split('/').length - 1];
+		var fileName = (oldURL.split('/')[oldURL.split('/').length - 1]).replace('?dl=0', '');
 		console.log('FileName = ' + fileName);
 		var newURL = DropboxManager.getFileLink(DropboxManager.FileType.AUDIO, fileName);
 		/*while(newURL === undefined) {
