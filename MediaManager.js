@@ -31,7 +31,11 @@ function _getAudioTitle(line) {
 
 function _getAudioURL(line) {
 	console.log('Got here');
-	return DropboxManager.getFileLink(DropboxManager.FileType.AUDIO, line.substring(line.indexOf(':') + 1));
+	var toReturn = DropboxManager.getFileLink(DropboxManager.FileType.AUDIO, line.substring(line.indexOf(':') + 1));
+	while(toReturn === undefined) {
+		require('deasync').runLoopOnce();
+	}
+	return ;
 }
 
 function _getAudioID(line) {

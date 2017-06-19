@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/blastervla/phrases-bot#readme",
   "dependencies": {
+    "deasync": "^0.1.10",
     "dropbox": "^2.5.4",
     "express": "^4.15.3",
     "http": "^0.0.0",
