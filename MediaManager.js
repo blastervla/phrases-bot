@@ -86,7 +86,6 @@ function updateLinks() {
 		}*/
 		toWrite += line.replace(oldURL, newURL) + '\n';
 	});
-	console.log('ToWrite -2 = ' + toWrite.substring(toWrite.length - 1));
 	fs.writeFileSync('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 1));
 	updatingLinks = false;
 	console.log('Stopped updating links');
