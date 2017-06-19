@@ -21,6 +21,9 @@ bot.on('/update', function(msg) {
 	MediaManager.updateLinks();
 	return msg.reply.text('Updating links');
 });
+bot.on('/db', function(msg) {
+	return msg.reply.text(MediaManager.getRamDB());
+});
 bot.start();
 // Finally, start our server
 app.listen((process.env.PORT || 5000), function() {

@@ -1,6 +1,7 @@
 require('telebot');
 const DropboxManager = require('./DropboxManager.js');
 var updatingLinks;
+var ramDB;
 function getQueryAnswers(bot, answers, msg) {
 	if(updatingLinks) {
 		console.log('Updating links... yet...');
@@ -91,9 +92,15 @@ function updateLinks() {
 	});
 	updatingLinks = false;
 	console.log('Stopped updating links');
+	ramDB = toWrite;
+}
+
+function getRamDB() {
+	return ramDB;
 }
 
 module.exports = {
 	getQueryAnswers: getQueryAnswers,
-	updateLinks: updateLinks
+	updateLinks: updateLinks,
+	getRamDB: getRamDB
 };
