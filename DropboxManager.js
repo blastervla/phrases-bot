@@ -12,7 +12,7 @@ function getFileLink(fileType, fileName) {
 	console.log(filePath);
 	dbx.sharingGetSharedLinks({path: filePath}).then(function(response) {
 		console.log((response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
-		return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+		return (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com').replace('?dl=0', '');
 	}).catch(function(error) {
 		console.error(error);
 		console.error('Well, fuck. Shit happens');
