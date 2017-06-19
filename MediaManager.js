@@ -41,7 +41,7 @@ function _getAnswersToReturn(bot, answers, query){
 
 function _getMemeQueryAnswersToReturn(bot, answers, query) {
 	var fs  = require("fs");
-	var memeNumber = query.substring(query.indexOf('meme'), query.indexOf(' ')).toLowerCase;
+	var memeNumber = query.substring(query.indexOf('meme'), query.indexOf(' ')).toLowerCase();
 	console.log('MemeNumber = ' + memeNumber);
 	console.log('Index of meme = ' + query.indexOf('meme'));
 	console.log('Index of space = ' + query.indexOf(' '));
