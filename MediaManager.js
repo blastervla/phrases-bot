@@ -5,7 +5,7 @@ function getQueryAnswers(bot, answers, msg) {
     var fs  = require("fs");
     //For each line in file:
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
-		if (line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 			answers.addVoice({
 				id: _getAudioID(line),
 				title: _getAudioTitle(line),
