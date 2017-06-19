@@ -35,7 +35,7 @@ function _getAudioURL(line) {
 	while(toReturn === undefined) {
 		require('deasync').runLoopOnce();
 	}
-	return ;
+	return toReturn;
 }
 
 function _getAudioID(line) {
