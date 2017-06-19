@@ -56,7 +56,7 @@ function _getMemeQueryAnswersToReturn(bot, answers, query) {
 	        photo_url: 'https://dl.dropboxusercontent.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg',
 	        thumb_url: 'https://dl.dropboxusercontent.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg'
 		});
-		DropboxManager.getFileLink;
+		DropboxManager.getFileLink();
 		return _getAnswersToReturn(bot, answers, query);
 	}
 	/*fs.readFileSync('./memeDatabase.vladb').toString().split('\n').forEach(function (line) {
