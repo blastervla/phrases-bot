@@ -57,7 +57,7 @@ function _getMemeQueryAnswersToReturn(bot, answers, query) {
 	        thumb_url: 'https://dl.dropboxusercontent.com/s/1rsj0yi11xqd3jw/Retarded_Spongebob.jpg'
 		});
 		DropboxManager.getFileLink();
-		return _getAnswersToReturn(bot, answers, query);
+		//return _getAnswersToReturn(bot, answers, query);
 	}
 	/*fs.readFileSync('./memeDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (memeNumber.toLowerCase() == 'all' || line.toLowerCase().indexOf(memeNumber) != -1) {
@@ -68,7 +68,7 @@ function _getMemeQueryAnswersToReturn(bot, answers, query) {
 			});
 		}
 	});*/
-	return _getAnswersToReturn(bot, answers, query);
+	//return _getAnswersToReturn(bot, answers, query);
 }
 
 function _retardizeText(text) {
