@@ -1,12 +1,8 @@
 require('telebot');
 const DropboxManager = require('./DropboxManager.js');
-var updatingLinks;
 var ramDB;
+var oldDBLines = null;
 function getQueryAnswers(bot, answers, msg) {
-	if(updatingLinks) {
-		console.log('Updating links... yet...');
-		return;
-	}
 	let query = msg.query;
 	if (query.indexOf('meme') == -1) {
 	    _getAudioQueryAnswersToReturn(bot, answers, query);
@@ -71,33 +67,46 @@ function _retardizeText(text) {
 	return retardizedText;
 }
 
-function updateLinks() {
-	updatingLinks = true;
+function getUpdatedLinks() {
 	var fs  = require("fs");
-	var toWrite = "";
+	var oldUrls = null;
+	var fileNames = null;
+	var i = 0;
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
-		var oldURL = _getAudioURL(line);
-		var fileName = (oldURL.split('/')[oldURL.split('/').length - 1]).replace('?dl=0', '');
-		console.log('FileName = ' + fileName);
-		var newURL = DropboxManager.getFileLink(DropboxManager.FileType.AUDIO, fileName);
-		/*while(newURL === undefined) {
-			require('deasync').runLoopOnce();
-			console.log('newURL = ' + newURL);
-		}*/
-		toWrite += line.replace(oldURL, newURL) + '\n';
+		oldUrls[i] = _getAudioURL(line);
+		fileNames[i] = (oldURL.split('/')[oldURL.split('/').length - 1]).replace('?dl=0', '');
+		oldDBLines[i] = line;
 	});
-	fs.writeFileSync('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 1));
-	updatingLinks = false;
-	console.log('Stopped updating links');
-	ramDB = toWrite;
+	DropboxManager.updateLinks(oldUrls, fileNames);
+}
+
+function saveUpdatedLinks() {
+	var linkDictionary = DropboxManager.getUpdatedLinks();
+	if (linkDictionary != null && linkDictionary != undefined) {
+		var toWrite = "";
+		for (var i = oldDBLines.length - 1; i >= 0; i--) {
+			var oldUrl = _getAudioURL(line);
+			toWrite += oldDBLines[i].replace(oldUrl, linkDictionary[oldUrl]) + "\n";
+		}
+		fs.writeFileSync('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 1));
+		ramDB = toWrite;
+		return false;
+	}
+	return true;
 }
 
 function getRamDB() {
 	return ramDB;
 }
 
+function getDropboxUpdatedLinks() {
+	return DropboxManager.getUpdatedLinks();
+}
+
 module.exports = {
 	getQueryAnswers: getQueryAnswers,
-	updateLinks: updateLinks,
-	getRamDB: getRamDB
+	getUpdatedLinks: getUpdatedLinks,
+	saveUpdatedLinks: saveUpdatedLinks,
+	getRamDB: getRamDB,
+	getDropboxUpdatedLinks: getDropboxUpdatedLinks
 };

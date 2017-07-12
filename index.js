@@ -18,8 +18,14 @@ bot.on('inlineQuery', msg => {
     return answersToReturn;
 });
 bot.on('/update', function(msg) {
-	MediaManager.updateLinks();
-	return msg.reply.text('Updating links');
+	MediaManager.getUpdatedLinks();
+	setTimeout(function() {
+		if(MediaManager.saveUpdatedLinks()) {
+			return msg.reply.text('Links updated!');
+		} else {
+			return msg.reply.text("Couldn't update links");
+		}
+	}, 10000);
 });
 bot.on('/db', function(msg) {
 	return msg.reply.text(MediaManager.getRamDB());
