@@ -86,7 +86,7 @@ function saveUpdatedLinks() {
 	if (linkDictionary != null && linkDictionary != undefined) {
 		var toWrite = "";
 		for (var i = oldDBLines.length - 1; i >= 0; i--) {
-			var oldUrl = _getAudioURL(line);
+			var oldUrl = _getAudioURL(oldDBLines[i]);
 			toWrite += oldDBLines[i].replace(oldUrl, linkDictionary[oldUrl]) + "\n";
 		}
 		fs.writeFileSync('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 1));
