@@ -75,7 +75,7 @@ function getUpdatedLinks() {
 	var i = 0;
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		oldUrls[i] = _getAudioURL(line);
-		fileNames[i] = (oldURL.split('/')[oldURL.split('/').length - 1]).replace('?dl=0', '');
+		fileNames[i] = (oldUrls[i].split('/')[oldUrls[i].split('/').length - 1]).replace('?dl=0', '');
 		oldDBLines[i] = line;
 	});
 	DropboxManager.updateLinks(oldUrls, fileNames);
