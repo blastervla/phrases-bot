@@ -4,6 +4,7 @@ var app = express();
 var http = require("http");
 var Credentials = require('./Credentials.js');
 var MediaManager = require('./MediaManager.js');
+var BotInfo = require('./BotInfo.js');
 const bot = new TeleBot({
     token: Credentials.getAuthToken(), // Required. Telegram Bot API token.
     polling: { // Optional. Use polling.
@@ -27,12 +28,19 @@ bot.on('/update', function(msg) {
 		}
 	}, 10000);
 });
-bot.on('/db', function(msg) {
+bot.on('/help', function(msg) {
+	return msg.reply.text(BotInfo.getHelpMessage());
+});
+
+bot.on('/start', function(msg) {
+	return msg.reply.text(BotInfo.getWelcomeMessage());
+});
+/*bot.on('/db', function(msg) {
 	return msg.reply.text(MediaManager.getRamDB());
 });
 bot.on('/links', function(msg) {
 	return msg.reply.text(MediaManager.getDropboxUpdatedLinks());
-});
+});*/
 bot.start();
 // Finally, start our server
 app.listen((process.env.PORT || 5000), function() {
