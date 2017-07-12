@@ -69,8 +69,9 @@ function _retardizeText(text) {
 
 function getUpdatedLinks() {
 	var fs  = require("fs");
-	var oldUrls = null;
-	var fileNames = null;
+	var oldUrls = [];
+	var fileNames = [];
+	oldDBLines = [];
 	var i = 0;
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		oldUrls[i] = _getAudioURL(line);

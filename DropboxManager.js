@@ -33,6 +33,8 @@ function updateLinks(oldUrls, fileNames) {
 		console.log(filePath);
 		dbx.sharingGetSharedLinks({path: filePath}).then(function(response) {
 			console.log((response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
+			if(linkDictionary == null)
+				linkDictionary = [];
 			linkDictionary[oldUrls[i]] = (response.links[0].url).replace('www.dropbox.com', 'dl.dropboxusercontent.com').replace('?dl=0', '');
 		}).catch(function(error) {
 			console.error(error);
@@ -40,6 +42,8 @@ function updateLinks(oldUrls, fileNames) {
 			dbx.sharingCreateSharedLinkWithSettings({path: filePath}).then(function(response) {
 		      	if(response.url != undefined) {
 		      		console.log((response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com'));
+		      		if(linkDictionary == null)
+						linkDictionary = [];
 		      		linkDictionary[oldUrls[i]] = (response.url).replace('www.dropbox.com', 'dl.dropboxusercontent.com').replace('?dl=0', '');
 		      	}
 		    });
