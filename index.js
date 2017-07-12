@@ -30,6 +30,9 @@ bot.on('/update', function(msg) {
 bot.on('/db', function(msg) {
 	return msg.reply.text(MediaManager.getRamDB());
 });
+bot.on('/links', function(msg) {
+	return msg.reply.text(MediaManager.getDropboxUpdatedLinks());
+});
 bot.start();
 // Finally, start our server
 app.listen((process.env.PORT || 5000), function() {
