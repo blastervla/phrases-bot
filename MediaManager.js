@@ -82,6 +82,7 @@ function getUpdatedLinks() {
 }
 
 function saveUpdatedLinks() {
+	var fs  = require("fs");
 	var linkDictionary = DropboxManager.getUpdatedLinks();
 	if (linkDictionary != null && linkDictionary != undefined) {
 		var toWrite = "";
