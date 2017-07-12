@@ -25,7 +25,7 @@ function getFileLink(fileType, fileName) {
 	});
 }
 
-function updateLinks(oldUrls, fileNames) {
+function updateLinks(oldUrls, fileNames, fileType) {
 	linkDictionary = null;
 	var dbx = new Dropbox({ accessToken: Credentials.getDropboxAuthToken() });
 	for (var i = 0; i < oldUrls.length; i++) {

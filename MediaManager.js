@@ -78,7 +78,7 @@ function getUpdatedLinks() {
 		fileNames[i] = (oldUrls[i].split('/')[oldUrls[i].split('/').length - 1]).replace('?dl=0', '');
 		oldDBLines[i] = line;
 	});
-	DropboxManager.updateLinks(oldUrls, fileNames);
+	DropboxManager.updateLinks(oldUrls, fileNames, DropboxManager.FileType.AUDIO);
 }
 
 function saveUpdatedLinks() {
