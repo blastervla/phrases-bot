@@ -1,3 +1,8 @@
+/* Commands & descriptions:
+start - Starts the bot
+help - I need somebody. HELP!
+features - List the bot's features
+*/
 const welcomeMessage = "Hey!\n\n" +
 					   "This bot will provide you with movie phrases to use in your conversations.\n\n" +
 					   "Please refer to the /help command in order to learn how to use it.\n\n" +
@@ -9,9 +14,9 @@ const helpMessage = "To use this bot, just type @PhrasesBot followed by a space 
 					"More features coming soon!";
 
 const featuresMessage = "With this bot you can:\n\n" +
-						"    - Search for media ('@PhrasesBot <your query>')\n" +
-						"    - Type '@PhrasesBot google <your query>' to google for someone else 😉\n" +
-						"    - Type '@PhrasesBot meme1 <your input>' to retardize your input 😜\n" +
+						"- Search for media ('@PhrasesBot <your query>')\n" +
+						"- Type '@PhrasesBot google <your query>' to google for someone else 😉\n" +
+						"- Type '@PhrasesBot meme1 <your input>' to retardize your input 😜\n\n" +
 						"More features coming soon!";
 
 function getWelcomeMessage() {
