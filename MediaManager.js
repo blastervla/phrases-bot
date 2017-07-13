@@ -47,7 +47,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	if(query.indexOf('google') != -1) {
 		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.substring(0, 6).split(' ').join('+');
 		answers.addArticle({
-			id: lmgtfy,
+			id: 'lmgtfy',
 			title: googleURL,
 			description: '',
 			message_text: 'Test'
