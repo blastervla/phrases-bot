@@ -35,10 +35,6 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	});
 	fs.readFileSync('./videoDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-			console.log(_getFileID(line));
-			console.log(_getFileTitle(line));
-			console.log(_getFileURL(line));
-			console.log(_getFileThumbnail(line));
 			answers.addVideo({
 				id: _getFileID(line),
 				title: _getFileTitle(line),
@@ -48,6 +44,15 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			});
 		}
 	});
+	if(query.indexOf('google') != 1) {
+		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.substring(0, 6).split(' ').join('+');
+		answers.addArticle({
+			id: lmgtfy,
+			title: googleURL,
+			description: '',
+			message_text: 'Test'
+		});
+	}
 	return _getAnswersToReturn(bot, answers, query);
 }
 
