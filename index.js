@@ -18,7 +18,7 @@ bot.on('inlineQuery', msg => {
 	var answersToReturn = MediaManager.getQueryAnswers(bot, answers, msg);
     return answersToReturn;
 });
-bot.on('/update', function(msg) {
+/*bot.on('/update', function(msg) {
 	MediaManager.getUpdatedLinks();
 	setTimeout(function() {
 		if(MediaManager.saveUpdatedLinks()) {
@@ -27,7 +27,7 @@ bot.on('/update', function(msg) {
 			return msg.reply.text("Couldn't update links");
 		}
 	}, 10000);
-});
+});*/
 bot.on('/help', function(msg) {
 	return msg.reply.text(BotInfo.getHelpMessage());
 });

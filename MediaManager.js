@@ -14,6 +14,16 @@ function getQueryAnswers(bot, answers, msg) {
 function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	var fs  = require("fs");
 	//For each line in file:
+	fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
+		if (line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+			answers.addArticle({
+				id: _getAudioID(line),
+				title: _getAudioTitle(line),
+				description: '',
+				message_text: _getAudioURL(line)
+			});
+		}
+	});
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 			answers.addVoice({
