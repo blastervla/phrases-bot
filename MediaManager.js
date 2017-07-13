@@ -43,7 +43,8 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 				id: _getFileID(line),
 				title: _getFileTitle(line),
 				video_url: _getFileURL(line),
-				thumb_url: _getFileThumbnail(line)
+				thumb_url: _getFileThumbnail(line),
+				mime_type: 'video/mp4'
 			});
 		}
 	});
