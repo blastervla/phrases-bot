@@ -35,11 +35,15 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	});
 	fs.readFileSync('./videoDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+			console.log(_getFileID(line));
+			console.log(_getFileTitle(line));
+			console.log(_getFileURL(line));
+			console.log(_getFileThumbnail(line));
 			answers.addVideo({
 				id: _getFileID(line),
 				title: _getFileTitle(line),
 				video_url: _getFileURL(line),
-				thumb_url: _getThumbnail(line)
+				thumb_url: _getFileThumbnail(line)
 			});
 		}
 	});
@@ -61,7 +65,7 @@ function _getFileID(line) {
 	return line.substring(0, line.indexOf('~'));
 }
 
-function _getThumbnail(line) {
+function _getFileThumbnail(line) {
 	return line.substring(line.indexOf('|') + 1);
 }
 
