@@ -48,9 +48,9 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.substring(0, 6).split(' ').join('+');
 		answers.addArticle({
 			id: 'lmgtfy',
-			title: googleURL,
+			title: 'Let me google that for you...',
 			description: '',
-			message_text: 'Test'
+			message_text: googleURL
 		});
 	}
 	return _getAnswersToReturn(bot, answers, query);
