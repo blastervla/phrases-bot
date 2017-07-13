@@ -17,35 +17,52 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 			answers.addArticle({
-				id: _getAudioID(line),
-				title: _getAudioTitle(line),
+				id: _getFileID(line),
+				title: _getFileTitle(line),
 				description: '',
-				message_text: _getAudioURL(line)
+				message_text: _getFileURL(line)
 			});
 		}
 	});
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 			answers.addVoice({
-				id: _getAudioID(line),
-				title: _getAudioTitle(line),
-				voice_url: _getAudioURL(line)
+				id: _getFileID(line),
+				title: _getFileTitle(line),
+				voice_url: _getFileURL(line)
+			});
+		}
+	});
+	fs.readFileSync('./videoDatabase.vladb').toString().split('\n').forEach(function (line) {
+		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+			answers.addVideo({
+				id: _getFileID(line),
+				title: _getFileTitle(line),
+				video_url: _getFileURL(line),
+				thumb_url: _getThumbnail(line)
 			});
 		}
 	});
 	return _getAnswersToReturn(bot, answers, query);
 }
 
-function _getAudioTitle(line) {
+function _getFileTitle(line) {
 	return line.substring(line.indexOf('~') + 1, line.indexOf(';'));
 }
 
-function _getAudioURL(line) {
-	return line.substring(line.indexOf(':') + 1);
+function _getFileURL(line) {
+	if(line.indexOf('|') != -1)
+		return line.substring(line.indexOf(':') + 1, line.indexOf('|'));
+	else
+		return line.substring(line.indexOf(':') + 1);
 }
 
-function _getAudioID(line) {
+function _getFileID(line) {
 	return line.substring(0, line.indexOf('~'));
+}
+
+function _getThumbnail(line) {
+	return line.substring(line.indexOf('|') + 1);
 }
 
 function _getAnswersToReturn(bot, answers, query){
@@ -84,7 +101,7 @@ function getUpdatedLinks() {
 	oldDBLines = [];
 	var i = 0;
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
-		oldUrls[i] = _getAudioURL(line);
+		oldUrls[i] = _getFileURL(line);
 		fileNames[i] = (oldUrls[i].split('/')[oldUrls[i].split('/').length - 1]).replace('?dl=0', '');
 		oldDBLines[i] = line;
 	});
@@ -97,7 +114,7 @@ function saveUpdatedLinks() {
 	if (linkDictionary != null && linkDictionary != undefined) {
 		var toWrite = "";
 		for (var i = oldDBLines.length - 1; i >= 0; i--) {
-			var oldUrl = _getAudioURL(oldDBLines[i]);
+			var oldUrl = _getFileURL(oldDBLines[i]);
 			toWrite += oldDBLines[i].replace(oldUrl, linkDictionary[oldUrl]) + "\n";
 		}
 		fs.writeFileSync('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 1));
