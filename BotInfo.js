@@ -4,7 +4,7 @@ const welcomeMessage = "Hey!\n\n" +
 					   "Enjoy!";
 
 const helpMessage = "To use this bot, just type @PhrasesBot followed by a space and your desired query.\n\n" +
-					"Then, simply choose from one of the given results and BOOM!u'\U0001F4A5' Your message has been sent.\n\n" +
+					"Then, simply choose from one of the given results and BOOM!💥 Your message has been sent.\n\n" +
 					"Please refer to the /features command to get a full list of all the bots features.\n\n" +
 					"More features coming soon!";
 
