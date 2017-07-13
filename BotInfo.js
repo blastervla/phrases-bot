@@ -10,8 +10,8 @@ const helpMessage = "To use this bot, just type @PhrasesBot followed by a space 
 
 const featuresMessage = "With this bot you can:\n\n" +
 						"    - Search for media ('@PhrasesBot <your query>')\n" +
-						"    - Type '@PhrasesBot google <your query>' to google for someone else u'\U0001F609'\n" +
-						"    - Type '@PhrasesBot meme1 <your input>' to retardize your input u'\U000FE329'\n" +
+						"    - Type '@PhrasesBot google <your query>' to google for someone else 😉\n" +
+						"    - Type '@PhrasesBot meme1 <your input>' to retardize your input 😜\n" +
 						"More features coming soon!";
 
 function getWelcomeMessage() {
