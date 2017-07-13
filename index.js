@@ -35,6 +35,10 @@ bot.on('/help', function(msg) {
 bot.on('/start', function(msg) {
 	return msg.reply.text(BotInfo.getWelcomeMessage());
 });
+
+bot.on('/features', function(msg) {
+    return msg.reply.text(BotInfo.getFeaturesMessage());
+});
 /*bot.on('/db', function(msg) {
 	return msg.reply.text(MediaManager.getRamDB());
 });
