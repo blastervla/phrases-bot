@@ -17,9 +17,6 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	if(query != "") {
 		fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
 			if (line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-				console.log(_getFileID(line));
-				console.log(_getFileTitle(line));
-				console.log(_getFileURL(line));
 				answers.addArticle({
 					id: _getFileID(line),
 					title: _getFileTitle(line),
@@ -51,7 +48,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			}
 		});
 	}
-	if(query.indexOf('google') != -1) {
+	if(query.toLowerCase().indexOf('google') != -1) {
 		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.slice(7).split(' ').join('+');
 		console.log(query);
 		console.log(query.slice(7));
