@@ -45,10 +45,10 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 		}
 	});
 	if(query.indexOf('google') != -1) {
-		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.slice(6).split(' ').join('+');
+		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.slice(7).split(' ').join('+');
 		console.log(query);
-		console.log(query.slice(6));
-		console.log(query.slice(6).split(' ').join('+'));
+		console.log(query.slice(7));
+		console.log(query.slice(7).split(' ').join('+'));
 		answers.addArticle({
 			id: 'lmgtfy',
 			title: 'Let me google that for you...',
