@@ -14,16 +14,21 @@ function getQueryAnswers(bot, answers, msg) {
 function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	var fs  = require("fs");
 	//For each line in file:
-	fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
-		if (line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-			answers.addArticle({
-				id: _getFileID(line),
-				title: _getFileTitle(line),
-				description: '',
-				message_text: _getFileURL(line)
-			});
-		}
-	});
+	if(query != "") {
+		fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
+			if (line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+				console.log(_getFileID(line));
+				console.log(_getFileTitle(line));
+				console.log(_getFileURL(line));
+				answers.addArticle({
+					id: _getFileID(line),
+					title: _getFileTitle(line),
+					description: '',
+					message_text: _getFileURL(line)
+				});
+			}
+		});
+	}
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 			answers.addVoice({
@@ -33,17 +38,19 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			});
 		}
 	});
-	fs.readFileSync('./videoDatabase.vladb').toString().split('\n').forEach(function (line) {
-		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-			answers.addVideo({
-				id: _getFileID(line),
-				title: _getFileTitle(line),
-				video_url: _getFileURL(line),
-				thumb_url: _getFileThumbnail(line),
-				mime_type: 'video/mp4'
-			});
-		}
-	});
+	if (query != "") {
+		fs.readFileSync('./videoDatabase.vladb').toString().split('\n').forEach(function (line) {
+			if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+				answers.addVideo({
+					id: _getFileID(line),
+					title: _getFileTitle(line),
+					video_url: _getFileURL(line),
+					thumb_url: _getFileThumbnail(line),
+					mime_type: 'video/mp4'
+				});
+			}
+		});
+	}
 	if(query.indexOf('google') != -1) {
 		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.slice(7).split(' ').join('+');
 		console.log(query);
