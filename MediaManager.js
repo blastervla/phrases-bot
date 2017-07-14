@@ -1,5 +1,6 @@
 require('telebot');
 const DropboxManager = require('./DropboxManager.js');
+const EmojiManager = require('node-emoji');
 var ramDB;
 var oldDBLines = null;
 function getQueryAnswers(bot, answers, msg) {
@@ -15,49 +16,85 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	var fs  = require("fs");
 	//For each line in file:
 	if(query != "") {
+		if (query.indexOf('emojify') != -1) {
+			var emojifiedText = EmojiManager.emojify(query.slice(8));
+			answers.addArticle({
+				id: 'emojify',
+				title: _getFileTitle(line),
+				description: '',
+				message_text: _getFileURL(line)
+			});
+		} else if (query.indexOf('emo') != -1) {
+			var emojiSearch = emoji.search(query.slice(4));
+			if (emojiSearch != null && emojiSearch != undefined) {
+				for (var i = emojiSearch.length - 1; i >= 0; i--) {
+					if (_isValidInfo([emojiSearch[i]])) {
+						answers.addArticle({
+							id: 'emoji' + i,
+							title: emojiSearch[i],
+							description: '',
+							message_text: emojiSearch[i]
+						});
+					}
+				}
+			}
+		}
 		fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
 			if (query.toLowerCase() == "text" || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-				answers.addArticle({
-					id: _getFileID(line),
-					title: _getFileTitle(line),
-					description: '',
-					message_text: _getFileURL(line)
-				});
+				if (isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
+					answers.addArticle({
+						id: _getFileID(line),
+						title: _getFileTitle(line),
+						description: '',
+						message_text: _getFileURL(line)
+					});
+				}
 			}
 		});
 	}
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
 		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-			answers.addVoice({
-				id: _getFileID(line),
-				title: _getFileTitle(line),
-				voice_url: _getFileURL(line)
-			});
+			if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
+				answers.addVoice({
+					id: _getFileID(line),
+					title: _getFileTitle(line),
+					voice_url: _getFileURL(line)
+				});
+			}
 		}
 	});
 	if (query != "") {
 		fs.readFileSync('./videoDatabase.vladb').toString().split('\n').forEach(function (line) {
 			if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-				answers.addVideo({
-					id: _getFileID(line),
-					title: _getFileTitle(line),
-					video_url: _getFileURL(line),
-					thumb_url: _getFileThumbnail(line),
-					mime_type: 'video/mp4'
-				});
+				if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line), _getFileThumbnail(line)])) {
+					answers.addVideo({
+						id: _getFileID(line),
+						title: _getFileTitle(line),
+						video_url: _getFileURL(line),
+						thumb_url: _getFileThumbnail(line),
+						mime_type: 'video/mp4'
+					});
+				}
 			}
 		});
 	}
 	if(query.toLowerCase().indexOf('google') != -1) {
 		var googleURL = 'http://www.letmegooglethat.com/?q=' + query.slice(7).split(' ').join('+');
-		console.log(query);
-		console.log(query.slice(7));
-		console.log(query.slice(7).split(' ').join('+'));
+		if(_isValidInfo([googleURL])) {
+			answers.addArticle({
+				id: 'lmgtfy',
+				title: 'Let me google that for you...',
+				description: '',
+				message_text: googleURL
+			});
+		}
+	}
+	if(answers.length == 0) {
 		answers.addArticle({
-			id: 'lmgtfy',
-			title: 'Let me google that for you...',
+			id: 'noRes',
+			title: "Sorry, this bot can't do anything about it" + EmojiManager.get('cry'),
 			description: '',
-			message_text: googleURL
+			message_text: ''
 		});
 	}
 	return _getAnswersToReturn(bot, answers, query);
@@ -147,6 +184,14 @@ function getRamDB() {
 
 function getDropboxUpdatedLinks() {
 	return DropboxManager.getUpdatedLinks();
+}
+
+function _isValidInfo(info){
+	var toReturn = true;
+	for (var i = info.length - 1; i >= 0; i--) {
+		toReturn = toReturn && (info[i] != null && info[i] != undefined && info[i] != "");
+	}
+	return toReturn;
 }
 
 module.exports = {
