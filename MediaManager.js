@@ -25,7 +25,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 				message_text: emojifiedText
 			});
 		} else if (query.toLowerCase().indexOf('emoji') != -1 && query.toLowerCase().indexOf('search') != -1) {
-			var emojiSearch = emoji.search(query.slice(query.toLowerCase().indexOf('emoji'), query.toLowerCase().indexOf('search') + 7));
+			var emojiSearch = EmojiManager.search(query.slice(query.toLowerCase().indexOf('emoji'), query.toLowerCase().indexOf('search') + 7));
 			if (_isValidInfo([emojiSearch])) {
 				for (var i = emojiSearch.length - 1; i >= 0; i--) {
 					if (_isValidInfo([emojiSearch[i]])) {
