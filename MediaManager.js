@@ -29,7 +29,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			if (_isValidInfo([emojiSearch])) {
 				for (var i = emojiSearch.length - 1; i >= 0; i--) {
 					if (_isValidInfo([emojiSearch[i]])) {
-						console.log(":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']);
+						console.log(":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']));
 						answers.addArticle({
 							id: emojiSearch[i]['key'] + i,
 							title: ":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']),
