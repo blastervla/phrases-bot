@@ -25,17 +25,20 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 				message_text: emojifiedText
 			});
 		} else if (query.toLowerCase().indexOf('emoji') != -1 && query.toLowerCase().indexOf('search') != -1) {
-			var emojiSearch = EmojiManager.search(query.substring(query.toLowerCase().indexOf('search') + 7));
-			if (_isValidInfo([emojiSearch])) {
-				for (var i = emojiSearch.length - 1; i >= 0; i--) {
-					if (_isValidInfo([emojiSearch[i]])) {
-						console.log(":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']));
-						answers.addArticle({
-							id: emojiSearch[i]['key'] + i,
-							title: ":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']),
-							description: '',
-							message_text: emojiSearch[i]['emoji']
-						});
+			var cleanQuery = query.substring(query.toLowerCase().indexOf('search') + 7);
+			if (cleanQuery.length < 3) {
+				var emojiSearch = EmojiManager.search(cleanQuery);
+				if (_isValidInfo([emojiSearch])) {
+					for (var i = emojiSearch.length - 1; i >= 0; i--) {
+						if (_isValidInfo([emojiSearch[i]])) {
+							console.log(":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']));
+							answers.addArticle({
+								id: emojiSearch[i]['key'] + i,
+								title: ":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']),
+								description: '',
+								message_text: emojiSearch[i]['emoji']
+							});
+						}
 					}
 				}
 			}
