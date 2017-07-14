@@ -17,6 +17,7 @@ const featuresMessage = "With this bot you can:\n\n" +
 						"- Search for media ('@PhrasesBot <your query>')\n" +
 						"- Type '@PhrasesBot google <your query>' to google for someone else 😉\n" +
 						"- Type '@PhrasesBot meme1 <your input>' to retardize your input 😜\n\n" +
+						"- Type '@PhrasesBot text' to get a preview of all the supported ASCII faces\n\n" +
 						"More features coming soon!";
 
 function getWelcomeMessage() {

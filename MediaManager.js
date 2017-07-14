@@ -16,7 +16,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	//For each line in file:
 	if(query != "") {
 		fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
-			if (line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+			if (query.toLowerCase() == "text" || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 				answers.addArticle({
 					id: _getFileID(line),
 					title: _getFileTitle(line),
