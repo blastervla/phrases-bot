@@ -29,10 +29,10 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			if (_isValidInfo([emojiSearch])) {
 				for (var i = emojiSearch.length - 1; i >= 0; i--) {
 					if (_isValidInfo([emojiSearch[i]])) {
-						console.log(EmojiManager.unemojify(emojiSearch[i]['key']) + "→ " + emojiSearch[i]['emoji']);
+						console.log(":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']);
 						answers.addArticle({
-							id: 'emoji' + i,
-							title: EmojiManager.unemojify(emojiSearch[i]['key']) + "→ " + emojiSearch[i]['emoji'],
+							id: emojiSearch[i]['key'] + i,
+							title: ":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']),
 							description: '',
 							message_text: ''
 						});
