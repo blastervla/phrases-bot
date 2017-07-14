@@ -20,9 +20,9 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			var emojifiedText = EmojiManager.emojify(query.slice(8));
 			answers.addArticle({
 				id: 'emojify',
-				title: _getFileTitle(line),
+				title: "Emojify!!",
 				description: '',
-				message_text: _getFileURL(line)
+				message_text: emojifiedText
 			});
 		} else if (query.indexOf('emo') != -1) {
 			var emojiSearch = emoji.search(query.slice(4));
