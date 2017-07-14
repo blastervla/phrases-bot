@@ -27,7 +27,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 		} else if (query.toLowerCase().indexOf('emoji') != -1 && query.toLowerCase().indexOf('search') != -1) {
 			var emojiSearch = EmojiManager.search(query.substring(query.toLowerCase().indexOf('emoji'), query.toLowerCase().indexOf('search') + 7));
 			console.log(emojiSearch);
-			console.log(query.substring(query.toLowerCase().indexOf('emoji'), query.toLowerCase().indexOf('search') + 7));
+			console.log(query.substring(query.toLowerCase().indexOf('search') + 7));
 			if (_isValidInfo([emojiSearch])) {
 				for (var i = emojiSearch.length - 1; i >= 0; i--) {
 					console.log('Entered');
@@ -44,6 +44,8 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			}
 		} else if (query.toLowerCase().indexOf('emo') != -1){
 			var emojiSearch = EmojiManager.get(query.slice(4));
+			console.log(emojiSearch);
+			console.log(query.slice(4));
 			if (_isValidInfo([emojiSearch])) {
 				for (var i = emojiSearch.length - 1; i >= 0; i--) {
 					if (_isValidInfo([emojiSearch[i]])) {
