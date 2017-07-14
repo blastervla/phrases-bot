@@ -34,7 +34,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 							id: emojiSearch[i]['key'] + i,
 							title: ":" + emojiSearch[i]['emoji'] + ": --> " + EmojiManager.unemojify(emojiSearch[i]['key']),
 							description: '',
-							message_text: ''
+							message_text: emojiSearch[i]['emoji']
 						});
 					}
 				}
