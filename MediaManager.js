@@ -41,7 +41,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 		}
 		fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
 			if (query.toLowerCase() == "text" || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-				if (isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
+				if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
 					answers.addArticle({
 						id: _getFileID(line),
 						title: _getFileTitle(line),
