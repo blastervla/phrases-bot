@@ -47,16 +47,12 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			console.log(emojiSearch);
 			console.log(query.slice(4));
 			if (_isValidInfo([emojiSearch])) {
-				for (var i = emojiSearch.length - 1; i >= 0; i--) {
-					if (_isValidInfo([emojiSearch[i]])) {
-						answers.addArticle({
-							id: 'emoji' + i,
-							title: emojiSearch[i],
-							description: '',
-							message_text: emojiSearch[i]
-						});
-					}
-				}
+				answers.addArticle({
+					id: 'emoji' + i,
+					title: emojiSearch,
+					description: '',
+					message_text: emojiSearch
+				});
 			}
 		}
 		fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
