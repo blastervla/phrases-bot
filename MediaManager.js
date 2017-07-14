@@ -31,7 +31,7 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 					if (_isValidInfo([emojiSearch[i]])) {
 						answers.addArticle({
 							id: 'emoji' + i,
-							title: EmojiManager.unemojify(emojiSearch[i]) + "→ " emojiSearch[i],
+							title: EmojiManager.unemojify(emojiSearch[i]) + "→ " + emojiSearch[i],
 							description: '',
 							message_text: ''
 						});
