@@ -16,44 +16,6 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 	var fs  = require("fs");
 	//For each line in file:
 	if(query != "") {
-		if (query.toLowerCase().indexOf('emojify') != -1) {
-			var emojifiedText = EmojiManager.emojify(query.slice(8));
-			answers.addArticle({
-				id: 'emojify',
-				title: "Emojify!!",
-				description: '',
-				message_text: emojifiedText
-			});
-		} else if (query.toLowerCase().indexOf('emoji') != -1 && query.toLowerCase().indexOf('search') != -1) {
-			var cleanQuery = query.substring(query.toLowerCase().indexOf('search') + 7);
-			if (cleanQuery.length >= 3) {
-				var emojiSearch = EmojiManager.search(cleanQuery);
-				if (_isValidInfo([emojiSearch])) {
-					for (var i = emojiSearch.length - 1; i >= 0; i--) {
-						if (_isValidInfo([emojiSearch[i]])) {
-							answers.addArticle({
-								id: emojiSearch[i]['key'] + i,
-								title: emojiSearch[i]['emoji'] + " → " + ":" + EmojiManager.unemojify(emojiSearch[i]['key']) + ":",
-								description: '',
-								message_text: emojiSearch[i]['emoji']
-							});
-						}
-					}
-				}
-			}
-		} else if (query.toLowerCase().indexOf('emo') != -1){
-			var emojiSearch = EmojiManager.get(query.slice(4));
-			console.log(emojiSearch);
-			console.log(query.slice(4));
-			if (_isValidInfo([emojiSearch])) {
-				answers.addArticle({
-					id: 'emoji' + i,
-					title: emojiSearch,
-					description: '',
-					message_text: emojiSearch
-				});
-			}
-		}
 		fs.readFileSync('./textDatabase.vladb').toString().split('\n').forEach(function (line) {
 			if (query.toLowerCase() == "text" || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 				if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
@@ -78,6 +40,24 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 			}
 		}
 	});
+	if (query != "" && query.toLowerCase().indexOf("pm") != -1) {
+		fs.readFileSync('./imageDatabase.vladb').toString().split('\n').forEach(function (line) {
+			if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+				if (_isValidInfo([_getFileID(line), _getFileURL(line)])) {
+					var thumb = _getFileThumbnail(line);
+					if (!_isValidInfo([thumb])) {
+						thumb = _getFileURL(line);
+					}
+					answers.addPhoto({
+				        id: _getFileID(line),
+				        caption: '',
+				        photo_url: _getFileURL(line),
+				        thumb_url: thumb
+				    });
+				}
+			}
+		});
+	}
 	if (query != "") {
 		fs.readFileSync('./videoDatabase.vladb').toString().split('\n').forEach(function (line) {
 			if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
