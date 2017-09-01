@@ -41,8 +41,9 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 		}
 	});
 	if (query != "" && query.toLowerCase().indexOf("pm") != -1) {
+		query = query.replace("pm", "");
 		fs.readFileSync('./imageDatabase.vladb').toString().split('\n').forEach(function (line) {
-			if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+			if (query.toLowerCase().indexOf('all') != -1 || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 				if (_isValidInfo([_getFileID(line), _getFileURL(line)])) {
 					var thumb = _getFileThumbnail(line);
 					if (!_isValidInfo([thumb])) {
