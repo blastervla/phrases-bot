@@ -18,10 +18,6 @@ const featuresMessage = "With this bot you can:\n\n" +
 						"- Type '@PhrasesBot google <your query>' to google for someone else 😉\n" +
 						"- Type '@PhrasesBot meme1 <your input>' to retardize your input 😜\n" +
 						"- Type '@PhrasesBot text' to get a preview of all the supported ASCII faces\n\n" +
-						"* Emoji: *\n" +
-						"- Type '@PhrasesBot emo <emoji name>' to get a specific emoji\n" +
-						"- Type '@PhrasesBot emojify <some text with :muscle: emojies!>' to get the inputted text with emojies\n" +
-						"- Type '@PhrasesBot emojisearch <your query>' to search for a list of the names of emojies related to your query\n\n" +
 						"More features coming soon!";
 
 function getWelcomeMessage() {
