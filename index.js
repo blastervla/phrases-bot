@@ -5,6 +5,7 @@ var http = require("http");
 var Credentials = require('./Credentials.js');
 var MediaManager = require('./MediaManager.js');
 var BotInfo = require('./BotInfo.js');
+var DatabaseManager = require('./DatabaseManager.js');
 const bot = new TeleBot({
     token: Credentials.getAuthToken(), // Required. Telegram Bot API token.
     polling: { // Optional. Use polling.
@@ -38,6 +39,10 @@ bot.on('/start', function(msg) {
 
 bot.on('/features', function(msg) {
     return msg.reply.text(BotInfo.getFeaturesMessage());
+});
+bot.on('/update', function(msg) {
+	DatabaseManager.updateAudioDatabase();
+    return msg.reply.text('Updating!');
 });
 /*bot.on('/db', function(msg) {
 	return msg.reply.text(MediaManager.getRamDB());

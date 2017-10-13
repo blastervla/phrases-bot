@@ -1,14 +1,19 @@
 require('telebot');
 const DropboxManager = require('./DropboxManager.js');
 const EmojiManager = require('node-emoji');
+const DatabaseManager = require('./DatabaseManager.js');
 var ramDB;
 var oldDBLines = null;
 function getQueryAnswers(bot, answers, msg) {
 	let query = msg.query;
-	if (query.indexOf('meme') == -1) {
-	    _getAudioQueryAnswersToReturn(bot, answers, query);
+	if (!DatabaseManager.isUpdating) {
+		if (query.indexOf('meme') == -1) {
+		    _getAudioQueryAnswersToReturn(bot, answers, query);
+		} else {
+			_getMemeQueryAnswersToReturn(bot, answers, query);
+		}
 	} else {
-		_getMemeQueryAnswersToReturn(bot, answers, query);
+		return bot.answerQuery(answers);
 	}
 }
 
