@@ -1,8 +1,6 @@
 require('telebot');
-const DropboxManager = require('./DropboxManager.js');
 const EmojiManager = require('node-emoji');
 const DatabaseManager = require('./DatabaseManager.js');
-var ramDB;
 var oldDBLines = null;
 function getQueryAnswers(bot, answers, msg) {
 	let query = msg.query;
@@ -149,44 +147,6 @@ function _retardizeText(text) {
 	return retardizedText;
 }
 
-function getUpdatedLinks() {
-	var fs  = require("fs");
-	var oldUrls = [];
-	var fileNames = [];
-	oldDBLines = [];
-	var i = 0;
-	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
-		oldUrls[i] = _getFileURL(line);
-		fileNames[i] = (oldUrls[i].split('/')[oldUrls[i].split('/').length - 1]).replace('?dl=0', '');
-		oldDBLines[i] = line;
-	});
-	DropboxManager.updateLinks(oldUrls, fileNames, DropboxManager.FileType.AUDIO);
-}
-
-function saveUpdatedLinks() {
-	var fs  = require("fs");
-	var linkDictionary = DropboxManager.getUpdatedLinks();
-	if (linkDictionary != null && linkDictionary != undefined) {
-		var toWrite = "";
-		for (var i = oldDBLines.length - 1; i >= 0; i--) {
-			var oldUrl = _getFileURL(oldDBLines[i]);
-			toWrite += oldDBLines[i].replace(oldUrl, linkDictionary[oldUrl]) + "\n";
-		}
-		fs.writeFileSync('./audioDatabase.vladb', toWrite.substring(0, toWrite.length - 1));
-		ramDB = toWrite;
-		return false;
-	}
-	return true;
-}
-
-function getRamDB() {
-	return ramDB;
-}
-
-function getDropboxUpdatedLinks() {
-	return DropboxManager.getUpdatedLinks();
-}
-
 function _isValidInfo(info){
 	var toReturn = true;
 	for (var i = info.length - 1; i >= 0; i--) {
@@ -197,8 +157,4 @@ function _isValidInfo(info){
 
 module.exports = {
 	getQueryAnswers: getQueryAnswers,
-	getUpdatedLinks: getUpdatedLinks,
-	saveUpdatedLinks: saveUpdatedLinks,
-	getRamDB: getRamDB,
-	getDropboxUpdatedLinks: getDropboxUpdatedLinks
 };

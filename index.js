@@ -19,16 +19,7 @@ bot.on('inlineQuery', msg => {
 	var answersToReturn = MediaManager.getQueryAnswers(bot, answers, msg);
     return answersToReturn;
 });
-/*bot.on('/update', function(msg) {
-	MediaManager.getUpdatedLinks();
-	setTimeout(function() {
-		if(MediaManager.saveUpdatedLinks()) {
-			return msg.reply.text('Links updated!');
-		} else {
-			return msg.reply.text("Couldn't update links");
-		}
-	}, 10000);
-});*/
+
 bot.on('/help', function(msg) {
 	return msg.reply.text(BotInfo.getHelpMessage());
 });
@@ -40,29 +31,29 @@ bot.on('/start', function(msg) {
 bot.on('/features', function(msg) {
     return msg.reply.text(BotInfo.getFeaturesMessage());
 });
+
 bot.on('/updateAudio', function(msg) {
 	DatabaseManager.updateAudioDatabase();
     return msg.reply.text('Updating Audio!');
 });
+
 bot.on('/updateText', function(msg) {
 	DatabaseManager.updateTextDatabase();
     return msg.reply.text('Updating Texts!');
 });
+
 bot.on('/updateImage', function(msg) {
 	DatabaseManager.updateImageDatabase();
     return msg.reply.text('Updating Images!');
 });
+
 bot.on('/updateVideo', function(msg) {
 	DatabaseManager.updateVideoDatabase();
     return msg.reply.text('Updating Videos!');
 });
-/*bot.on('/db', function(msg) {
-	return msg.reply.text(MediaManager.getRamDB());
-});
-bot.on('/links', function(msg) {
-	return msg.reply.text(MediaManager.getDropboxUpdatedLinks());
-});*/
+
 bot.start();
+
 // Finally, start our server
 app.listen((process.env.PORT || 5000), function() {
   console.log('Telegram app listening on port ' + (process.env.PORT || 5000) + '!');
