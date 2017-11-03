@@ -32,22 +32,22 @@ bot.on('/features', function(msg) {
     return msg.reply.text(BotInfo.getFeaturesMessage());
 });
 
-bot.on(/^\/updateAudio (.+)$/, (msg, props) => {
+bot.on(/^\/update_audio (.+)$/, (msg, props) => {
     const pass = props.match[1];
     return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.AUDIO);
 });
 
-bot.on(/^\/updateText (.+)$/, (msg, props) => {
+bot.on(/^\/update_text (.+)$/, (msg, props) => {
     const pass = props.match[1];
     return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.TEXT);
 });
 
-bot.on(/^\/updateImage (.+)$/, (msg, props) => {
+bot.on(/^\/update_image (.+)$/, (msg, props) => {
     const pass = props.match[1];
     return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.IMAGE);
 });
 
-bot.on(/^\/updateVideo (.+)$/, (msg, props) => {
+bot.on(/^\/update_video (.+)$/, (msg, props) => {
     const pass = props.match[1];
     return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.VIDEO);
 });
