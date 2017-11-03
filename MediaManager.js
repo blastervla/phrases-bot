@@ -10,25 +10,30 @@ const UpdateType = {
 }
 function authAdm(msg, pass, updateType) {
 	if (pass == "Vladimeiser") {
+		var type = "";
     	switch (updateType) {
     		case UpdateType.AUDIO: {
     			DatabaseManager.updateAudioDatabase();
+    			type = "Audios";
     			break;
     		}
     		case UpdateType.TEXT: {
     			DatabaseManager.updateTextDatabase();
+    			type = "Texts";
     			break;
     		}
     		case UpdateType.IMAGE: {
     			DatabaseManager.updateImageDatabase();
+    			type = "Images";
     			break;
     		}
     		case UpdateType.VIDEO: {
     			DatabaseManager.updateVideoDatabase();
+    			type = "Videos";
     			break;
     		}
     	}
-   		return msg.reply.text('As you command, Vladimir, The Vampire Prince. Updating Audios!');
+   		return msg.reply.text('As you command, Vladimir, The Vampire Prince. Updating ' + type + '!');
 	} else {
 		return msg.reply.text("Sorry dude, but you're not HIM");
 	}
