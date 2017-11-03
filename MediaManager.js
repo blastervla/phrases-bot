@@ -33,13 +33,15 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 		});
 	}
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
-		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-			if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
-				answers.addVoice({
-					id: _getFileID(line),
-					title: _getFileTitle(line),
-					voice_url: _getFileURL(line)
-				});
+		if (line.toLowerCase().indexOf('sensitive') == -1 || (line.toLowerCase().indexOf('sensitive') != -1 && (query.toLowerCase().indexOf('sensitive') != -1))) {
+			if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+				if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
+					answers.addVoice({
+						id: _getFileID(line),
+						title: _getFileTitle(line),
+						voice_url: _getFileURL(line)
+					});
+				}
 			}
 		}
 	});
