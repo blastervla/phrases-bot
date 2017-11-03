@@ -2,6 +2,42 @@ require('telebot');
 const EmojiManager = require('node-emoji');
 const DatabaseManager = require('./DatabaseManager.js');
 var oldDBLines = null;
+const UpdateType = {
+	AUDIO : 0,
+    TEXT : 1,
+    IMAGE : 2,
+    VIDEO : 3
+}
+function authAdm(msg, pass, updateType) {
+	if (pass == "Vladimeiser") {
+		var type = "";
+    	switch (updateType) {
+    		case UpdateType.AUDIO: {
+    			DatabaseManager.updateAudioDatabase();
+    			type = "Audios";
+    			break;
+    		}
+    		case UpdateType.TEXT: {
+    			DatabaseManager.updateTextDatabase();
+    			type = "Texts";
+    			break;
+    		}
+    		case UpdateType.IMAGE: {
+    			DatabaseManager.updateImageDatabase();
+    			type = "Images";
+    			break;
+    		}
+    		case UpdateType.VIDEO: {
+    			DatabaseManager.updateVideoDatabase();
+    			type = "Videos";
+    			break;
+    		}
+    	}
+   		return msg.reply.text('As you command, Vladimir, The Vampire Prince. Updating ' + type + '!');
+	} else {
+		return msg.reply.text("Sorry dude, but you're not HIM");
+	}
+}
 function getQueryAnswers(bot, answers, msg) {
 	let query = msg.query;
 	if (!DatabaseManager.isUpdating) {
@@ -33,13 +69,15 @@ function _getAudioQueryAnswersToReturn(bot, answers, query) {
 		});
 	}
 	fs.readFileSync('./audioDatabase.vladb').toString().split('\n').forEach(function (line) {
-		if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-			if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
-				answers.addVoice({
-					id: _getFileID(line),
-					title: _getFileTitle(line),
-					voice_url: _getFileURL(line)
-				});
+		if (line.toLowerCase().indexOf('sensitive') == -1 || (line.toLowerCase().indexOf('sensitive') != -1 && (query.toLowerCase().indexOf('sensitive') != -1))) {
+			if (query.toLowerCase() == 'all' || line.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+				if (_isValidInfo([_getFileID(line), _getFileTitle(line), _getFileURL(line)])) {
+					answers.addVoice({
+						id: _getFileID(line),
+						title: _getFileTitle(line),
+						voice_url: _getFileURL(line)
+					});
+				}
 			}
 		}
 	});
@@ -157,4 +195,6 @@ function _isValidInfo(info){
 
 module.exports = {
 	getQueryAnswers: getQueryAnswers,
+	UpdateType: UpdateType,
+	authAdm: authAdm
 };
