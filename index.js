@@ -32,24 +32,24 @@ bot.on('/features', function(msg) {
     return msg.reply.text(BotInfo.getFeaturesMessage());
 });
 
-bot.on('/updateAudio', function(msg) {
-	DatabaseManager.updateAudioDatabase();
-    return msg.reply.text('Updating Audio!');
+bot.on(/^\/updateAudio (.+)$/, (msg, props) => {
+    const pass = props.match[1];
+    return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.AUDIO);
 });
 
-bot.on('/updateText', function(msg) {
-	DatabaseManager.updateTextDatabase();
-    return msg.reply.text('Updating Texts!');
+bot.on(/^\/updateText (.+)$/, (msg, props) => {
+    const pass = props.match[1];
+    return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.TEXT);
 });
 
-bot.on('/updateImage', function(msg) {
-	DatabaseManager.updateImageDatabase();
-    return msg.reply.text('Updating Images!');
+bot.on(/^\/updateImage (.+)$/, (msg, props) => {
+    const pass = props.match[1];
+    return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.IMAGE);
 });
 
-bot.on('/updateVideo', function(msg) {
-	DatabaseManager.updateVideoDatabase();
-    return msg.reply.text('Updating Videos!');
+bot.on(/^\/updateVideo (.+)$/, (msg, props) => {
+    const pass = props.match[1];
+    return MediaManager.authAdm(msg, pass, MediaManager.UpdateType.VIDEO);
 });
 
 bot.start();
@@ -60,5 +60,4 @@ app.listen((process.env.PORT || 5000), function() {
 });
 setInterval(function() {
     http.get("http://phrases-bot.herokuapp.com");
-    console.log("Pinging App!");
-}, 300000); // every 5 minutes (300000)
+}, 300000); // every 5 minutes (300000), keeps bot awake

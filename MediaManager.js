@@ -2,6 +2,37 @@ require('telebot');
 const EmojiManager = require('node-emoji');
 const DatabaseManager = require('./DatabaseManager.js');
 var oldDBLines = null;
+const UpdateType = {
+	AUDIO : 0,
+    TEXT : 1,
+    IMAGE : 2,
+    VIDEO : 3
+}
+function authAdm(msg, pass, updateType) {
+	if (pass == "Vladimeiser") {
+    	switch (updateType) {
+    		case UpdateType.AUDIO: {
+    			DatabaseManager.updateAudioDatabase();
+    			break;
+    		}
+    		case UpdateType.TEXT: {
+    			DatabaseManager.updateTextDatabase();
+    			break;
+    		}
+    		case UpdateType.IMAGE: {
+    			DatabaseManager.updateImageDatabase();
+    			break;
+    		}
+    		case UpdateType.VIDEO: {
+    			DatabaseManager.updateVideoDatabase();
+    			break;
+    		}
+    	}
+   		return msg.reply.text('As you command, Vladimir, The Vampire Prince. Updating Audios!');
+	} else {
+		return msg.reply.text("Sorry dude, but you're not HIM");
+	}
+}
 function getQueryAnswers(bot, answers, msg) {
 	let query = msg.query;
 	if (!DatabaseManager.isUpdating) {
@@ -159,4 +190,6 @@ function _isValidInfo(info){
 
 module.exports = {
 	getQueryAnswers: getQueryAnswers,
+	UpdateType: UpdateType,
+	authAdm: authAdm
 };
