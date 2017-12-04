@@ -60,5 +60,5 @@ app.listen((process.env.PORT || 5000), function() {
 });
 
 setInterval(function() {
-    http.get("http://phrases-bot.herokuapp.com");
+    http.get("https://phrases-bot-mirror.herokuapp.com/");
 }, 300000); // every 5 minutes (300000), keeps bot awake
